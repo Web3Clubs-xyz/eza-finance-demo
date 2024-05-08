@@ -24,7 +24,7 @@ Before you begin, ensure you have met the following requirements:
 
 2. Navigate into the project directory:
     ```bash
-    cd express-project
+    cd eza-finance-demo
 
 3. Install dependencies:
     ```bash
