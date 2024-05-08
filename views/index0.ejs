@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
+    rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      data-mdb-collapse-init
+      class="navbar-toggler"
+      type="button"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <h2>Test Dashboard</h2>
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/saccos">Saccos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/liquidators">Liquidators</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/daos">Daos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/loans">loans</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <a class="text-reset me-3" href="#">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+
+      <!-- Notifications -->
+      <div class="dropdown">
+        <a
+          data-mdb-dropdown-init
+          class="text-reset me-3 dropdown-toggle hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          aria-expanded="false"
+        >
+          <i class="fas fa-bell"></i>
+          <span class="badge rounded-pill badge-notification bg-danger">1</span>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuLink"
+        >
+          <li>
+            <a class="dropdown-item" href="#">Some news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Another news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Avatar -->
+      <div class="dropdown">
+        <a
+          data-mdb-dropdown-init
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          aria-expanded="false"
+        >
+          <img
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+            class="rounded-circle"
+            height="25"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+        >
+          <li>
+            <a class="dropdown-item" href="#">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+    <div class="container">
+      <!-- summary -->
+
+      <br>
+       <!-- Button trigger modal -->
+       <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#daoModal">
+        Register DAO
+      </button>
+
+       <!-- Button trigger modal -->
+       <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#daoDepositModal">
+        DAO deposit USDC
+      </button>
+
+       <!-- Button trigger modal -->
+       <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#registerLiquidatorModal">
+        Register Liquidator
+      </button>
+
+      <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#liquidatorModal">
+        Liquidator Deposit
+      </button>
+
+      <br> <br>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Current Circle USDC Balance</h5>
+              <p class="card-text">USDC <%= usdcAmount %> </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Registered DAOs</h5>
+              <p class="card-text"><%= daos.length %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Registered Saccos</h5>
+              <p class="card-text"><%= saccos.length %> </p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Loans Requested </h5>
+              <p class="card-text"><%= loans.length %></p>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="col-md-3" style="margin-top: 20px;">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Registered Liquidator</h5>
+              <p class="card-text"><%= liquidators.length %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3" style="margin-top: 20px;">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Eza Wallet Balance</h5>
+              <p class="card-text">Ksh <%= eza_balance %></p>
+            </div>
+          </div>
+        </div>
+
+
+      
+
+      </div>
+
+      <div class="container" style="margin-top: 20px;">
+      
+      
+      </div>
+      <!-- steps -->
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button
+              data-mdb-collapse-init
+              class="accordion-button"
+              type="button"
+              data-mdb-toggle="collapse"
+              data-mdb-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              Step #1 --> Registeration of Sacco
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-mdb-parent="#accordionExample">
+            <div class="accordion-body">
+              <p>In this step, we will register a Sacco and give them an ILP enabled wallet address.</p>
+
+             <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#exampleModal">
+                Register Sacco
+              </button>
+
+          
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button
+              data-mdb-collapse-init
+              class="accordion-button collapsed"
+              type="button"
+              data-mdb-toggle="collapse"
+              data-mdb-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              Step #2 --> Loan Request
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-mdb-parent="#accordionExample">
+            <div class="accordion-body">
+              <p>In this step, the sacco will make a request for loan of a certain amount</p>
+              
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#loanModal">
+                Request for loan
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+    
+      </div>
+
+
+    </div>
+  
+      <!-- Modal -->
+  <div class="modal fade" id="daoModal" tabindex="-1" aria-labelledby="daoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Dao</h5>
+          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="daoForm">
+            <div class="mb-3">
+              <label for="saccoName" class="form-label">DAO Name</label>
+              <input type="text" class="form-control" id="saccoName" name="name">
+            </div>
+
+            <div class="mb-3">
+              <label for="wallet_id" class="form-label">DAO Wallet ID (for now the wallet has to be from circle)</label>
+              <input type="text" class="form-control" id="wallet_id" name="wallet_id">
+            </div>
+        
+            <!-- Add more input fields as needed -->
+            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Save changes</button>
+          </form>
+
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="daoDepositModal" tabindex="-1" aria-labelledby="daoDepositModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">DAO Deposit</h5>
+          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="daoDepositForm">
+            <div class="mb-3">
+              <label for="saccoName" class="form-label">Select DAO</label>
+              <!-- <input type="text" class="form-control" id="saccoName" name="name"> -->
+              <select class="form-select" aria-label="" name="dao_name">
+                <option selected>Select</option>
+                <% daos.forEach(function(dao) { %>
+
+                  <option value="<%= dao.id %>"><%= dao.name %> </option>
+                  
+                <% }); %>
+           
+              </select>
+            </div>
+
+            <!-- <div class="mb-3">
+              <label for="destinationAddress" class="form-label">Enter Destination Address</label>
+              <input type="text" class="form-control" id="destinationAddress" name="destinationAddress">
+            </div> -->
+
+            <div class="mb-3">
+              <label for="amount" class="form-label">Enter USDC Amount</label>
+              <input type="text" class="form-control" id="amount" name="amount">
+            </div>
+        
+            <!-- Add more input fields as needed -->
+            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Save changes</button>
+          </form>
+
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Register Sacco</h5>
+          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="saccoForm">
+            <div class="mb-3">
+              <label for="saccoName" class="form-label">Sacco Name</label>
+              <input type="text" class="form-control" id="saccoName" name="name">
+            </div>
+            <div class="mb-3">
+              <label for="payment_pointer" class="form-label">ILP Payment Pointer</label>
+              <input type="text" class="form-control" id="payment_pointer" name="payment_pointer">
+            </div>
+            <!-- Add more input fields as needed -->
+            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Save changes</button>
+          </form>
+
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+   <div class="modal fade" id="loanModal" tabindex="-1" aria-labelledby="loanModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Request Loan</h5>
+          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="loanRequestForm">
+            <div class="mb-3">
+              <label for="saccoName" class="form-label">Select Sacco</label>
+              <!-- <input type="text" class="form-control" id="saccoName" name="name"> -->
+              <select class="form-select" aria-label="" name="sacco_name">
+                <option >Select</option>
+                <% saccos.forEach(function(sacco) { %>
+
+                  <option value="<%= sacco.id %>"><%= sacco.name %></option>
+                  
+                <% }); %>
+           
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="saccoName" class="form-label">Select DAO</label>
+              <!-- <input type="text" class="form-control" id="saccoName" name="name"> -->
+              <select class="form-select" aria-label="" name="dao_name">
+                <option selected>Select</option>
+                <% daos.forEach(function(dao) { %>
+
+                  <option value="<%= dao.id %>"><%= dao.name %> (balance: <%= dao.current_wallet_balance * 130 %>)</option>
+                  
+                <% }); %>
+           
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="amount" class="form-label">Enter Amount</label>
+              <input type="text" class="form-control" id="amount" name="amount">
+            </div>
+            <!-- Add more input fields as needed -->
+            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Request</button>
+          </form>
+
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+     <!-- Modal -->
+     <div class="modal fade" id="registerLiquidatorModal" tabindex="-1" aria-labelledby="registerLiquidatorModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Liquidator</h5>
+            <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="registerliquidatorForm">
+              <div class="mb-3">
+                <label for="saccoName" class="form-label">Liquidator Name</label>
+                <input type="text" class="form-control" id="saccoName" name="name">
+              </div>
+  
+              <div class="mb-3">
+                <label for="wallet_address" class="form-label">Liquidator Wallet address</label>
+                <input type="text" class="form-control" id="wallet_address" name="wallet_address">
+              </div>
+              <!-- Add more input fields as needed -->
+              <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Register</button>
+            </form>
+  
+           
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+   <!-- Modal -->
+   <div class="modal fade" id="liquidatorModal" tabindex="-1" aria-labelledby="liquidatorModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Liquidator Deposit</h5>
+          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="liquidatorSendForm">
+        
+            <div class="mb-3">
+              <label for="saccoName" class="form-label">Select Liquidator</label>
+              <!-- <input type="text" class="form-control" id="saccoName" name="name"> -->
+              <select class="form-select" aria-label="" name="liquidator_name">
+                <option>Select</option>
+                <% liquidators.forEach(function(liq) { %>
+
+                  <option value="<%= liq.id %>"><%= liq.name %></option>
+                  
+                <% }); %>
+           
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="usdc_amount" class="form-label">Enter USDC to liquidate</label>
+              <input type="text" class="form-control" id="usdc_amount" name="usdc_amount" oninput="updateLiquidatorKsh()">
+            </div>
+
+            <div class="mb-3">
+              <label for="amount" class="form-label">Ksh amount you should send</label>
+              <input type="text" class="form-control" id="liq_amount" name="amount" disabled>
+            </div>
+            <!-- Add more input fields as needed -->
+            <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Send</button>
+          </form>
+
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+</body>
+
+   <!-- Bootstrap JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
+    ></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('saccoForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      try {
+        const response = await fetch('/register_sacco', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataObject)
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          // Handle success response if needed
+          window.location.href = '/saccos';
+        } else {
+          // Handle error response
+          console.error('Failed to create sacco:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error creating sacco:', error.message);
+      }
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('daoForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      try {
+        const response = await fetch('/register_dao', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataObject)
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          // Handle success response if needed
+          window.location.href = '/';
+        } else {
+          // Handle error response
+          console.error('Failed to create sacco:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error creating sacco:', error.message);
+      }
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('loanRequestForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      try {
+        const response = await fetch('/sacco_loan_request', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataObject)
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log(responseData)
+          if(responseData.message == 'success'){
+            alert("Loan Request sent, wait for approval")
+            window.location.href = '/';
+          }else{
+            alert(responseData.message)
+          }
+          // Handle success response if needed
+          
+        } else {
+          // Handle error response
+          console.error('Failed to create sacco:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error creating sacco:', error.message);
+      }
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('daoDepositForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      try {
+        const response = await fetch('/dao_deposit_usdc', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataObject)
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log(responseData)
+          if(responseData.message == 'success'){
+            alert("USDC Transfer in progress, check after 1 minute")
+            window.location.href = '/';
+          }else{
+            alert(responseData.message)
+          }
+          // Handle success response if needed
+          
+        } else {
+          // Handle error response
+          console.error('Failed to create sacco:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error creating sacco:', error.message);
+      }
+    });
+  });
+
+
+  
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('registerliquidatorForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      try {
+        const response = await fetch('/liquiditor_register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataObject)
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log(responseData)
+          alert('Success')
+          
+          // window.location.href = responseData.url;
+        
+          // Handle success response if needed
+          
+        } else {
+          // Handle error response
+          console.error('Failed to create sacco:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error creating sacco:', error.message);
+      }
+    });
+  });
+  
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('liquidatorSendForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      try {
+        const response = await fetch('/liquiditor_pay', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataObject)
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log(responseData)
+          
+          
+          // window.location.href = responseData.url;
+          window.open(responseData.url, '_blank');
+        
+          // Handle success response if needed
+          
+        } else {
+          // Handle error response
+          console.error('Failed to create sacco:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error creating sacco:', error.message);
+      }
+    });
+  });
+
+  function updateLiquidatorKsh(){
+   usdc =  document.getElementById('usdc_amount').value;
+
+   ksh = usdc * 130
+
+   document.getElementById('liq_amount').value = parseFloat(ksh.toFixed(2));
+
+
+  }
+</script>
+
+</html>

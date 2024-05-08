@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
+    rel="stylesheet"
+    />
+
+       <!-- Font Awesome -->
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+       <!-- Google Fonts -->
+       <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+       <!-- Bootstrap CSS -->
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+        <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      data-mdb-collapse-init
+      class="navbar-toggler"
+      type="button"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <h2>Test Dashboard</h2>
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/saccos">Saccos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/liquidators">Liquidators</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/daos">Daos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/loans">loans</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <a class="text-reset me-3" href="#">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+
+      <!-- Notifications -->
+      <div class="dropdown">
+        <a
+          data-mdb-dropdown-init
+          class="text-reset me-3 dropdown-toggle hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuLink"
+          role="button"
+          aria-expanded="false"
+        >
+          <i class="fas fa-bell"></i>
+          <span class="badge rounded-pill badge-notification bg-danger">1</span>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuLink"
+        >
+          <li>
+            <a class="dropdown-item" href="#">Some news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Another news</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Avatar -->
+      <div class="dropdown">
+        <a
+          data-mdb-dropdown-init
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          aria-expanded="false"
+        >
+          <img
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+            class="rounded-circle"
+            height="25"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+        >
+          <li>
+            <a class="dropdown-item" href="#">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<div class="container">
+    <h2>Saccos</h2>
+
+    <ul class="list-group list-group-light">
+        <% saccos.forEach(function(sacco) { %>
+        
+            <li class="list-group-item">
+              <strong>Sacco Name:</strong> <%= sacco.name %><br>
+              <strong>Rafiki Wallet Balance:</strong>Ksh <%= sacco.current_wallet_balance %><br>
+              <strong>Wallet Address:</strong> <%= sacco.wallet_address %><br>
+              <strong>ILP Payment Pointer:</strong> <%= sacco.ilp_payment_pointer %><br>
+              <!-- <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#saccoDepositModal">
+                Deposit
+              </button> -->
+
+              <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#saccoWithdrawModal">
+                Withdraw
+              </button>
+
+              <h4>My Loans</h4>
+              <ul class="list-group-item">
+                <% if (sacco.loans !== null) { %>
+
+                  <% var loans = JSON.parse(sacco.loans); %>
+                  <% loans.forEach(function(loan) { %>
+                      <li>
+                          <strong>Amount Received:</strong> Ksh <%= loan.amount %><br></li>
+                          <li> <strong>Interest Rate:</strong> <%= loan.interest_rate %> %<br></li>
+                          <li>  <strong>Repayment Amount:</strong> Ksh <%= loan.repayment_amount %><br></li>
+                          <li><strong>Approved:</strong> <%= loan.is_approved %><br></li>
+                          <li> <strong>Status:</strong> <%= loan.loan_status %><br></li>
+                          <li> <strong>Paid Amount:</strong> <%= loan.repaid_amount %><br></li>
+                          <li> <strong>Pending Blance:</strong> <%= loan.repayment_amount - loan.repaid_amount %><br></li>
+                          
+                          <li> <strong>Repayed:</strong> <%= loan.is_repaid_fulfilled %><br></li>
+
+                  
+                      <li>
+                        <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#saccoDepositModal">
+                          Repay
+                        </button> 
+                      </li>
+                                  <!-- Modal -->
+        <div class="modal fade" id="saccoDepositModal" tabindex="-1" aria-labelledby="saccoDepositModal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Repay Loan title</h5>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="saccoDepostForm">
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="loan_id" name="loan_id" hidden value="<%= loan.id %>">
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="sacco_name" name="sacco_name" hidden value="<%= sacco.id %>">
+                  </div>
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Enter Amount</label>
+                    <input type="text" class="form-control" id="amount" name="amount">
+                  </div>
+                  <!-- Add more input fields as needed -->
+                  <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Send</button>
+                </form>
+
+              
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+                  <% }); %>
+                <% } else { %>
+                  <li class="list-group-item">No Loans</li>
+              <% } %>
+              </ul>
+              
+              <!-- Add any other sacco details you want to display -->
+            </li><br>
+
+     
+
+           <!-- Modal -->
+           <div class="modal fade" id="saccoWithdrawModal" tabindex="-1" aria-labelledby="saccoWithdrawModal" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Withdraw title</h5>
+                  <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="saccoWithdrawForm">
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="sacco_name" name="sacco_name" hidden value="<%= sacco.id %>">
+                    </div>
+                    <div class="mb-3">
+                      <label for="amount" class="form-label">Enter Amount</label>
+                      <input type="text" class="form-control" id="amount" name="amount">
+                    </div>
+                    <!-- Add more input fields as needed -->
+                    <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Withdraw</button>
+                  </form>
+        
+                 
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+      </ul>
+
+
+  </div>
+</body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+   <!-- MDB -->
+   <script
+   type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
+   ></script>
+   <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('saccoDepostForm');
+    const loan_id = document.getElementById('loan_id').value;
+    console.log(loan_id)
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+
+      try {
+        const response = await fetch('/loan_repay/'+loan_id, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataObject)
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log(responseData)
+          // alert("Success")
+          window.open(responseData.url, '_blank');
+          
+          // window.location.href = responseData.url;
+        
+          // Handle success response if needed
+          
+        } else {
+          // Handle error response
+          console.error('Failed to create sacco:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error creating sacco:', error.message);
+      }
+    });
+  });
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('saccoWithdrawForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      try {
+        const response = await fetch('/sacco_withdraw', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataObject)
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log(responseData)
+          alert("Success")
+          window.location.reload()
+          
+          // window.location.href = responseData.url;
+        
+          // Handle success response if needed
+          
+        } else {
+          // Handle error response
+          console.error('Failed to create sacco:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error creating sacco:', error.message);
+      }
+    });
+  });
+</script>

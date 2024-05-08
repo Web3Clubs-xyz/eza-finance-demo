@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquidity Provider Dashboard</title>
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css"
+    rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+          data-mdb-collapse-init
+          class="navbar-toggler"
+          type="button"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="navbar-brand mt-2 mt-lg-0" href="#">
+            <h2>Liquidity Provider Dashboard</h2>
+          </a>
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         
+            
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+         
+          <%= lp_details.name  %>
+          <!-- Avatar -->
+          <div class="dropdown">
+            <a
+              data-mdb-dropdown-init
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                class="rounded-circle"
+                height="25"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item" href="#">My profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Settings</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Right elements -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+
+    <section class="h-100 gradient-custom-2">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-lg-12 col-xl-12">
+            <!-- my loans -->
+            <h3 class="mt-3 mb-3">Buy MarketPlace</h3>
+           
+            <table class="table align-middle mb-0 bg-white table-responsive table-bordered">
+              <thead class="bg-light">
+                <tr>
+                  <th>Reference</th>
+                  <th>USDC Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (dao_deposits !== null) { %>
+                  <% dao_deposits.forEach(function(deposit) { %>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="ms-3">
+                            <p class="fw-bold mb-1">DP-K121ASA0<%= deposit.id %></p>
+                          </div>
+                        </div>
+                      </td>
+                    
+                  
+                      <td><%= deposit.amount %></td>
+                      <td>
+                          <span class=" badge-success rounded-pill d-inline"><%= deposit.is_fulfilled %></span>
+                       
+                      </td>
+                      
+                      <td>
+                        <% if (deposit.is_fulfilled === "true" ) { %>
+                          -
+                        <% } else {%>
+                          <button type="button" class="btn btn-link btn-sm btn-rounded"onclick="updateLiquidatorKsh('<%= deposit.amount %>')">
+                            BUY
+                          </button>
+                       
+
+                          <div class="modal fade" id="liquidatorModal" tabindex="-1" aria-labelledby="liquidatorModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Liquidator Deposit</h5>
+                                  <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form id="liquidatorSendForm">
+                                
+                                      <input type="text" class="form-control" id="liquidator_name" name="liquidator_name" hidden value="<%= lp_details.id %>">
+                                    
+                                      <input type="text" class="form-control" id="usdc_amount" hidden name="usdc_amount">
+                                  
+                                    <div class="mb-3">
+                                      <label for="amount" class="form-label">Ksh amount you should send</label>
+                                      <input type="text" class="form-control" id="liq_amount" name="amount" disabled>
+                                    </div>
+                                    <!-- Add more input fields as needed -->
+                                    <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Send</button>
+                                  </form>
+                        
+                                 
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+                                 
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+  
+                        <% } %>
+                       
+                      </td>
+                       
+                    </tr>
+                    <% }); %>
+                  <% } else { %>
+                    <li class="list-group-item">No Loans</li>
+                <% } %>
+              
+              </tbody>
+            </table>
+
+            
+          </div>
+          <div class="col col-lg-12 col-xl-12">
+            <!-- my loans -->
+            <h3 class="mt-3 mb-3">Sell MarketPlace</h3>
+           
+            <table class="table align-middle mb-0 bg-white table-responsive table-bordered">
+              <thead class="bg-light">
+                <tr>
+                  <th>Reference</th>
+                  <th>KSH Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (dao_deposits !== null) { %>
+                  <% sacco_deposits.forEach(function(deposit) { %>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="ms-3">
+                            <p class="fw-bold mb-1">DP-K121ASA0<%= deposit.id %></p>
+                          </div>
+                        </div>
+                      </td>
+                    
+                  
+                      <td><%= deposit.amount %></td>
+                      <td>
+                          <span class=" badge-success rounded-pill d-inline"><%= deposit.is_fulfilled %></span>
+                       
+                      </td>
+                      
+                      <td>
+                        <% if (deposit.is_fulfilled === "true" ) { %>
+                          -
+                        <% } else {%>
+                          <button type="button" class="btn btn-link btn-sm btn-rounded"onclick="updateLiquidatorUSDC('<%= deposit.amount %>')">
+                            SELL
+                          </button>
+                       
+
+                          <div class="modal fade" id="liquidatorKSHModal" tabindex="-1" aria-labelledby="liquidatorKSHModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Buy  KSH</h5>
+                                  <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form id="liquidatorSendForm">
+                                
+                                      <input type="text" class="form-control" id="liquidator_name" name="liquidator_name" hidden value="<%= lp_details.id %>">
+                                    
+                                      <input type="text" class="form-control" id="ksh_amount" hidden name="ksh_amount">
+                                  
+                                    <div class="mb-3">
+                                      <label for="amount" class="form-label">USDC amount you should send</label>
+                                      <input type="text" class="form-control" id="liq_amount" name="amount" disabled>
+                                    </div>
+                                    <!-- Add more input fields as needed -->
+                                    <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Send</button>
+                                  </form>
+                        
+                                 
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+                                 
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+  
+                        <% } %>
+                       
+                      </td>
+                       
+                    </tr>
+                    <% }); %>
+                  <% } else { %>
+                    <li class="list-group-item">No Loans</li>
+                <% } %>
+              
+              </tbody>
+            </table>
+
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+</body>
+
+   <!-- Bootstrap JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"
+    ></script>
+  <script>
+     document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('liquidatorSendForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      try {
+        const response = await fetch('/liquiditor_pay', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataObject)
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log(responseData)
+          
+          
+          // window.location.href = responseData.url;
+          window.open(responseData.url, '_blank');
+        
+          // Handle success response if needed
+          
+        } else {
+          // Handle error response
+          console.error('Failed to create sacco:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error creating sacco:', error.message);
+      }
+    });
+  });
+
+  function updateLiquidatorKsh(amount){
+   document.getElementById('usdc_amount').value = amount ;
+
+   ksh = amount * 130
+
+   document.getElementById('liq_amount').value = parseFloat(ksh.toFixed(2));
+// Show the modal
+    var modal = new mdb.Modal(document.getElementById('liquidatorModal'));
+    modal.show();
+
+  }
+  </script>
+</html>

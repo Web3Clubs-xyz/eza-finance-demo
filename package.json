@@ -1,0 +1,28 @@
+{
+  "name": "eza-platform",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "@circle-fin/developer-controlled-wallets": "^2.0.0",
+    "@circle-fin/smart-contract-platform": "^2.0.0",
+    "@circle-fin/user-controlled-wallets": "^2.1.0",
+    "axios": "^1.6.8",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "ethers": "5.7.2",
+    "express": "^4.19.2",
+    "http-errors": "~1.6.3",
+    "intasend-node": "^1.0.8",
+    "morgan": "~1.9.1",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.0",
+    "sqlite3": "^5.1.7",
+    "uuidv4": "^6.2.13"
+  }
+}
