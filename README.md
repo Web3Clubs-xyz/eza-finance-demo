@@ -48,7 +48,7 @@ Open your web browser and go to
 
 
 ## How it works
-![screenshot](V2_EZA_Technical_Diagram.jpg)
+![screenshot](V2_EZA_Technical_Diagram.png)
 
 Detailed flow can be found here https://miro.com/app/board/uXjVKPflm6I=/?share_link_id=57634080369
 ## Authors
