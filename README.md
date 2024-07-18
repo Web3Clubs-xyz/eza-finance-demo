@@ -1,9 +1,14 @@
 
 # Eza Finance
 
-Eza.Finance is an enterprise that utilizes Web3 lending platforms to connect decentralized autonomous organizations (DAOs) with local financial institutions in Africa, such as Credit Unions and MFIs. 
-The aim is to enable affordable lending to underserved groups like small businesses, women, and youth. By leveraging Web3 technology and settling payments in usable legal tender, Eza.Finance facilitates fast and accessible credit provision while fostering economic growth and development in Africa.
-The platform sources funds from DAOs at competitive rates and converts them to local fiat eg. Kenyan shillings (KES). These funds are then onlent to Saccos, MFIs, and other financial institutions, which can use them to offer loans to their members or customers. The platform also facilitates the conversion of repayments back to the original tokens, enabling the return of the principal and interest to the DAOs
+Eza.Finance enables offchain lending by connecting Decentralized Autonomous Organizations (DAOs) with financial institutions in emerging markets, such as Credit Unions and MFIs. 
+The aim is to enable affordable lending to thriving businesses in emerging markets while building loan guarantees for Web3 lenders in a trust minimized manner.
+
+We settle the loans in usable legal tender + abstract away Web3 complexities for the tradFi borrower. 
+
+The platform sources funds from DAOs and Web3 lenders at competitive rates and converts them to local fiat eg. Kenyan shillings (KES). These funds are then onlent to Credit Unions, MFIs, and other financial institutions, which can use them to offer loans to their SMEs. The platform facilitates the conversion of repayments back to the original tokens, enabling the return of the principal and interest to the lenders.
+
+EZA is experimenting a guarantee model through an EigenLayer AVS (see "How it Works" board below for architecture)
 
 ### Getting Started
 This is a test repository for this project and is based on Express Js with SQLite DB.
